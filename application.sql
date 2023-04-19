@@ -4,7 +4,7 @@ CREATE TABLE apprenants (
     `nom_apprenant` VARCHAR(50),
     `prenom_apprenant` VARCHAR(50),
     `email_apprenant` VARCHAR(50),
-    `mot_de_pass` VARCHAR(50),
+    `mtp` VARCHAR(50),
     CONSTRAINT email_unique UNIQUE (`email_apprenant`)
 );
 
@@ -46,7 +46,7 @@ CREATE TABLE formation (
     `titre` VARCHAR(50),
     `description` TEXT,
     `id_formateur` INT,
-    `mot_de_passe` VARCHAR(50),
+    `mtp` VARCHAR(50),
    `image`VARCHAR(100),
     `categorie` VARCHAR(50),
     `masse_horaire` INT,
