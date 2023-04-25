@@ -24,7 +24,7 @@ if(isset($_POST["submit"])){
   $result = mysqli_query($con, "SELECT * FROM Apprenant WHERE email = '$email' AND mtp ='$mtp'");
   $row = mysqli_fetch_assoc($result);
 
-///////////////////////condition de confirmation et verifier le mot pass
+//condition de confirmation et verifier le mot pass
 
   if(mysqli_num_rows($result) > 0){
     if($password == $row['password']  && $email == $row['email']) {
