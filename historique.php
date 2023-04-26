@@ -27,7 +27,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="">HOME</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="index.php">HOME</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="historique.php">HISTORIQUE</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="profil.php">PROFIL</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="Login.php">Logout</a></li>   
@@ -43,7 +43,7 @@
            <section class="page-section portfolio" id="portfolio" style="margin-top: 10%;  padding-bottom:2%;">
             <div class="container">
                 <!-- Portfolio Section Heading-->
-                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Centre Formation</h2>
+                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">HISTORIQUE</h2>
                 <!-- Icon Divider-->
                 <div class="divider-custom">
                     <div class="divider-custom-line"></div>
@@ -52,28 +52,7 @@
                 </div>
  </section>
 
-        <div class="top-nav-right container" >
-        <form class="form-inline" action="" method="post" style="display: flex; margin-left: 28%;">
-            <div class="form-group mx-sm-3 mb-2">
-                <input type="text" class="form-control" name="search" placeholder="Search" style="width:100%; transition: width 0.4s ease-in-out;">
-            </div>
-            <div class="form-group mx-sm-3 mb-3">
-                <select class="form-select" aria-label="Default select example" name="etat">
-                    <option selected name="etat">Catégories</option>
-                    <option value="Développment Web" name="Développment Web">Développment Web</option>
-                    <option value="Développment Mobile" name="Développment Mobile">Développment Mobile</option>
-                    <option value="Designe Graphique" name="Designe Graphique">Designe Graphique</option>
-                    <option value="Bases de données" name="Bases de données">Bases de données</option>
-                </select>
-            </div>
 
-            <div style="margin: bottom 10px; width: 20%;">
-            <button type="submit" name="recherche" class="btn btn-success mb-2"
-                style="background-color: #DFF3FC;border:1px solid #000;color:#000; "
-                id="btn">SEARCH</button>
-            </div>
-        </form>
-        </div>
 
 
      

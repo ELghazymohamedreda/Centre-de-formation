@@ -3,13 +3,13 @@ require 'db.php';
 
 if(isset($_POST["submit"])){
   $nom = $_POST["nom"];
-  $prénom = $_POST["prenom"];
-  $adresse_email = $_POST["email"];
+  $prenom = $_POST["prenom"];
+  $email = $_POST["email"];
   $mtp = $_POST["mtp"];
   
-    $query = "INSERT INTO Apprenant (nom, prenom, email, mtp) VALUES('$nom','$prenom', '$email' ,  '$mtp', NOW() , 0)";
+    $query = "INSERT INTO apprenants (nom, prenom, email, mtp) VALUES('$nom','$prenom', '$email' ,  '$mtp')";
     if(mysqli_query($con, $query)){
-        header("location:login.php");
+        header("location:Login.php");
     }
     
 }
@@ -46,7 +46,7 @@ if(isset($_POST["submit"])){
                     </div>
                     <div class="form-group">
                         <label for="prénom"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                        <input type="text" name="prenom" id="prénom" placeholder="Prénom"/>
+                        <input type="text" name="prenom" id="prenom" placeholder="Prénom"/>
                     </div>
                     <div class="form-group">
                         <label for="email"><i class="zmdi zmdi-email"></i></label>

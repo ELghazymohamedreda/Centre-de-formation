@@ -1,16 +1,16 @@
 -- Create table for Apprenants
 CREATE TABLE apprenants (
-   `id_apprenant` INT PRIMARY KEY,
-    `nom_apprenant` VARCHAR(50),
-    `prenom_apprenant` VARCHAR(50),
-    `email_apprenant` VARCHAR(50),
+   `id_apprenant` INT PRIMARY KEY AUTO_INCREMENT,
+    `nom` VARCHAR(50),
+    `prenom` VARCHAR(50),
+    `email` VARCHAR(50),
     `mtp` VARCHAR(50),
     CONSTRAINT email_unique UNIQUE (`email_apprenant`)
 );
 
 -- Create table for Sessions
 CREATE TABLE sessions (
-    `id_session` INT PRIMARY KEY,
+    `id_session` INT PRIMARY KEY AUTO_INCREMENT,
     `date_debut` DATE,
     `date_fin` DATE,
     `etat` VARCHAR(50),
@@ -23,7 +23,7 @@ CREATE TABLE sessions (
 
 -- Create table for Inscription
 CREATE TABLE inscription (
-    `id_apprenant` INT,
+    `id_apprenant` INT AUTO_INCREMENT,
     `id_session` INT,
     `resultat` VARCHAR(50),
     `date_valu` DATE,
@@ -42,7 +42,7 @@ CREATE TABLE formateurs (
 
 -- Create table for Formation
 CREATE TABLE formation (
-    `id_formation` INT PRIMARY KEY,
+    `id_formation` INT PRIMARY KEY AUTO_INCREMENT,
     `titre` VARCHAR(50),
     `description` TEXT,
     `id_formateur` INT,

@@ -1,3 +1,41 @@
+<?php
+if (isset($_POST["submit"])) {
+  $email = $_POST['email'];
+  $password = $_POST['mtp'];
+  $con = mysqli_connect("localhost","Root","","Application");
+
+  if (!$con) {
+    die("Connection failed: " . mysqli_connect_error());
+  }
+
+  $sql = "SELECT * FROM apprenants WHERE email = '$email'";
+  $result = mysqli_query($con, $sql);
+
+  if (mysqli_num_rows($result) == 1) {
+    $row = mysqli_fetch_assoc($result);
+    if ($password == $row['mtp']) {
+        session_start();
+        $_SESSION['id_apprenant'] = $row['id_apprenant'];
+        header("Location:index.php");
+        exit();
+      
+    } else {
+      echo "Invalid username or password";
+    }
+  } else {
+    echo "Invalid username or password";
+  }
+
+  mysqli_close($con);
+}
+?>
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,37 +52,7 @@
 </head>
 <body>
 
-<?php
-
-require 'db.php';
-session_start();
-if(isset($_POST["submit"])){
-  $email = $_POST["email"];
-  $mtp = $_POST["mtp"];
-  $result = mysqli_query($con, "SELECT * FROM Apprenant WHERE email = '$email' AND mtp ='$mtp'");
-  $row = mysqli_fetch_assoc($result);
-
-//condition de confirmation et verifier le mot pass
-
-  if(mysqli_num_rows($result) > 0){
-    if($password == $row['password']  && $email == $row['email']) {
-      $_SESSION["login"] = true;
-      $_SESSION["id_apprenant"] = $row["id_apprenant"];
-      header("Location: index.php");
-    }
-
-    else{
-      echo
-      "<script> alert('Wrong Password'); </script>";
-    }
-  }
-  else{
-    echo
-    "<script> alert('User Not Registered'); </script>";
-  }
-}
-
-?>
+ÒÒ
 
     <div class="main">
 
