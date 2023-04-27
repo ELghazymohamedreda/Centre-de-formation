@@ -1,3 +1,9 @@
+<?php 
+session_start();
+$id_apprenant = $_SESSION['id_apprenant'];
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -51,6 +57,25 @@
                     <div class="divider-custom-line"></div>
                 </div>
  </section>
+
+ <div class="row">
+        <?php 
+        $con = mysqli_connect("localhost","Root","","Application");
+        $sql = "SELECT id_session FROM inscription WHERE id_apprenant ='$id_apprenant'";
+        $result = mysqli_query($con,$sql);
+        $array=array();
+        while( $row=mysqli_fetch_assoc($result)){
+            $id_session = $row["id_session"];
+            $array[]=$id_session;
+        }
+        $hey=print_r($array);
+       
+
+        
+        
+        
+        ?>
+	</div>
 
 
 

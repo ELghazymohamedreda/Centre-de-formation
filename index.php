@@ -1,3 +1,27 @@
+<?php 
+session_start();
+$id_apprenant = $_SESSION['id_apprenant'];
+if(isset($_POST['inscription'])){
+    $con = mysqli_connect("localhost","Root","","Application");
+    $id_formation=$_POST['formations'];
+    $sql = "SELECT id_session FROM sessions WHERE id_formation='$id_formation'";
+    $resulte = mysqli_query($con,$sql);
+    $row = mysqli_fetch_assoc($resulte);
+    $id_session = $row['id_session'];
+    if(mysqli_num_rows($resulte) > 0){
+        $query="INSERT INTO `inscription`(`id_apprenant`, `id_session`, `resultat`, `date_valu`) VALUES ('$id_apprenant','$id_session','',NULL)";
+        echo $query;
+        if(mysqli_query($con,$query)){
+            header("location:historique.php");
+
+        }
+    }
+
+
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -15,6 +39,7 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        <link href="dist/styles.css" rel="stylesheet" />
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -75,6 +100,38 @@
         </form>
         </div>
 
+        <!-- partial:index.partial.html -->
+        <section>
+	<div class="row">
+        <?php 
+        $con = mysqli_connect("localhost","Root","","Application");
+        $sql = "SELECT * FROM formation";
+        $result = mysqli_query($con,$sql);
+        while ($row=mysqli_fetch_assoc($result)){
+
+            ?>
+            	<div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="card">
+                        <div class="cover item-a">
+                            <img src="<?php echo $row["image"] ?>" width="460vw" >
+                            <h1><?php echo $row["titre"] ?></h1>
+                            <p><?php echo $row["description"] ?></p>
+                            <p><?php echo $row["masse_horaire"] ?> Heure</p>
+                            <form action="" method="post">
+                                <input type="hidden" name="formations" value="<?php echo $row["id_formation"] ?>">
+                                <input type="submit" value="inscription" name="inscription">
+                            </form>
+                        </div>
+                    </div>
+		       </div>
+            <?php
+        }
+        
+        
+        ?>
+	</div>
+</section>
+
 
      
         <!-- Footer-->
@@ -116,5 +173,6 @@
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+        <script  src="dist/script.js"></script>
     </body>
 </html>

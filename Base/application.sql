@@ -23,7 +23,8 @@ CREATE TABLE sessions (
 
 -- Create table for Inscription
 CREATE TABLE inscription (
-    `id_apprenant` INT AUTO_INCREMENT,
+    `id_inscription` INT PRIMARY KEY AUTO_INCREMENT,
+    `id_apprenant` INT,
     `id_session` INT,
     `resultat` VARCHAR(50),
     `date_valu` DATE,
