@@ -41,15 +41,11 @@ $id_apprenant = $_SESSION['id_apprenant'];
                 </div>
             </div>
         </nav>
-        <!-- Masthead-->
-        <!-- <header>
-            <img src="assets/img/shelf-12.jpg" alt="" style="width: 50%; margin-left:25%;">
-        </header> -->
-           <!-- Portfolio Section-->
-           <section class="page-section portfolio" id="portfolio" style="margin-top: 10%;  padding-bottom:2%;">
+
+        <section class="page-section portfolio" id="portfolio" style="margin-top: 10%;  padding-bottom:2%;">
             <div class="container">
                 <!-- Portfolio Section Heading-->
-                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">HISTORIQUE</h2>
+                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Centre Formation</h2>
                 <!-- Icon Divider-->
                 <div class="divider-custom">
                     <div class="divider-custom-line"></div>
@@ -58,14 +54,52 @@ $id_apprenant = $_SESSION['id_apprenant'];
                 </div>
  </section>
 
- <div class="row">
-        <?php 
-        $con = mysqli_connect("localhost","Root","","Application");
-        $sql = "SELECT * FROM `formation` WHERE id_formation IN (SELECT id_formation FROM sessions WHERE id_session IN (SELECT id_session FROM inscription WHERE id_apprenant ='$id_apprenant'))";
-        $result = mysqli_query($con,$sql);
-        while( $row=mysqli_fetch_assoc($result)){
-            ?>
-            <div class="col-md-4 col-sm-6 col-xs-12">
+        <div class="top-nav-right container" >
+        <form class="form-inline" action="" method="post" style="display: flex; margin-left: 28%;">
+            <div class="form-group mx-sm-3 mb-2">
+                <input type="text" class="form-control" name="search" placeholder="Search" style="width:100%; transition: width 0.4s ease-in-out;">
+            </div>
+            <div class="form-group mx-sm-3 mb-3">
+                <select class="form-select" aria-label="Default select example" name="etat">
+                    <option selected name="etat">Catégories</option>
+                    <option value="Développment Web" name="Développment Web">Développment Web</option>
+                    <option value="Développment Mobile" name="Développment Mobile">Développment Mobile</option>
+                    <option value="Designe Graphique" name="Designe Graphique">Designe Graphique</option>
+                    <option value="Bases de données" name="Bases de données">Bases de données</option>
+                </select>
+            </div>
+
+            <div style="margin: bottom 10px; width: 20%;">
+            <button type="submit" name="recherche" class="btn btn-success mb-2"
+                style="background-color: #DFF3FC;border:1px solid #000;color:#000; "
+                id="btn">SEARCH</button>
+            </div>
+        </form>
+        </div>
+
+<?php 
+ 
+ 
+  if(isset($_POST['recherche'])){
+    $con = mysqli_connect("localhost","Root","","Application");
+
+  $titre = $_POST['search'];
+  $Categorie = $_POST['etat'];
+  $query="";
+  $result ="";
+
+ 
+  if($titre!=""){
+      $query="SELECT * FROM `formation` WHERE titre = '$titre'";
+      $result= mysqli_query($conn,$query);
+  }elseif($Categorie !="" ){
+     $query="SELECT * FROM `formation` WHERE categorie = '$Categorie'";
+     $result= mysqli_query($con,$query);
+  }
+  if(mysqli_query($con,$query)){
+    while($row=mysqli_fetch_assoc($result)){
+        ?>
+               <div class="col-md-4 col-sm-6 col-xs-12">
                     <div class="card">
                         <div class="cover item-a">
                             <img src="<?php echo $row["image"] ?>" width="460vw" >
@@ -75,16 +109,18 @@ $id_apprenant = $_SESSION['id_apprenant'];
                         </div>
                     </div>
 		       </div>
-            <?php
-        }
-       
+            
+        <?php
 
-        
-        
-        
-        ?>
-	</div>
+    }
+  }
+  
+  
+}
 
+
+
+?>
 
 
 

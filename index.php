@@ -9,7 +9,7 @@ if(isset($_POST['inscription'])){
     $row = mysqli_fetch_assoc($resulte);
     $id_session = $row['id_session'];
     if(mysqli_num_rows($resulte) > 0){
-        $query="INSERT INTO `inscription`(`id_apprenant`, `id_session`, `resultat`, `date_valu`) VALUES ('$id_apprenant','$id_session','',NULL)";
+        $query="INSERT INTO `inscription`(`id_apprenant`, `id_session`, `resultat`, `date_valu`) VALUES ('$id_apprenant','$id_session',NULL,NULL)";
         echo $query;
         if(mysqli_query($con,$query)){
             header("location:historique.php");
@@ -85,10 +85,10 @@ if(isset($_POST['inscription'])){
             <div class="form-group mx-sm-3 mb-3">
                 <select class="form-select" aria-label="Default select example" name="etat">
                     <option selected name="etat">Catégories</option>
-                    <option value="Développment Web" name="Développment Web">Développment Web</option>
-                    <option value="Développment Mobile" name="Développment Mobile">Développment Mobile</option>
-                    <option value="Designe Graphique" name="Designe Graphique">Designe Graphique</option>
-                    <option value="Bases de données" name="Bases de données">Bases de données</option>
+                    <option value="Développement Web" >Développement Web</option>
+                    <option value="Développment Mobile" >Développment Mobile</option>
+                    <option value="Designe Graphique" >Designe Graphique</option>
+                    <option value="Bases de données" >Bases de données</option>
                 </select>
             </div>
 
@@ -104,28 +104,56 @@ if(isset($_POST['inscription'])){
         <section>
 	<div class="row">
         <?php 
-        $con = mysqli_connect("localhost","Root","","Application");
-        $sql = "SELECT * FROM formation";
-        $result = mysqli_query($con,$sql);
-        while ($row=mysqli_fetch_assoc($result)){
+          $con = mysqli_connect("localhost","Root","","Application");
 
-            ?>
-            	<div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="card">
-                        <div class="cover item-a">
-                            <img src="<?php echo $row["image"] ?>" width="460vw" >
-                            <h1><?php echo $row["titre"] ?></h1>
-                            <p><?php echo $row["description"] ?></p>
-                            <p><?php echo $row["masse_horaire"] ?> Heure</p>
-                            <form action="" method="post">
-                                <input type="hidden" name="formations" value="<?php echo $row["id_formation"] ?>">
-                                <input type="submit" value="inscription" name="inscription">
-                            </form>
-                        </div>
-                    </div>
-		       </div>
-            <?php
+         if(isset($_POST['recherche'])){
+        
+          $titre = $_POST['search'];
+          $Categorie = $_POST['etat'];
+          $query="";
+          $result ="";
+        
+         
+          if($titre!=""){
+              $query="SELECT * FROM `formation` WHERE titre = '$titre'";
+              $result= mysqli_query($con,$query);
+          }elseif($Categorie !="" ){
+             $query="SELECT * FROM `formation` WHERE categorie = '$Categorie'";
+             $result= mysqli_query($con,$query);
+          }
+          if(mysqli_query($con,$query)){
+           
+          }
+          
+          
+        }else{
+            $query = "SELECT * FROM formation";
+            $result = mysqli_query($con,$query);
+           
         }
+        while($row=mysqli_fetch_assoc($result)){
+            ?>
+                   <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="card">
+                            <div class="cover item-a">
+                                <img src="<?php echo $row["image"]; ?>" width="460vw" >
+                                <h1><?php echo $row["titre"]; ?></h1>
+                                <p><?php echo $row["description"]; ?></p>
+                                <p><?php echo $row["masse_horaire"]; ?> Heure</p>
+                            </div>
+                            <form action="" method="post">
+                                <input type="hidden" name="formations" value="<?php echo $row["id_formation"];?>">
+                                <button type="submit" name="inscription">Inscription</button>
+                           </form>
+                        </div>
+                        
+                   </div>
+                
+            <?php
+    
+        }
+          
+       
         
         
         ?>
