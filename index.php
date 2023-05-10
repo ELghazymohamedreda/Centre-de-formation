@@ -37,6 +37,7 @@ if(isset($_POST['inscription'])){
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
         <link href="dist/styles.css" rel="stylesheet" />
@@ -102,7 +103,7 @@ if(isset($_POST['inscription'])){
 
         <!-- partial:index.partial.html -->
         <section>
-	<div class="row">
+	<div class="row" style="padding:20px;">
         <?php 
           $con = mysqli_connect("localhost","Root","","Application");
 
@@ -133,17 +134,17 @@ if(isset($_POST['inscription'])){
         }
         while($row=mysqli_fetch_assoc($result)){
             ?>
-                   <div class="col-md-4 col-sm-6 col-xs-12">
-                        <div class="card">
+                   <div class="col-md-4 col-sm-5 col-xs-12" style="margin-top:20px;">
+                        <div class="card" style="padding:20px;">
                             <div class="cover item-a">
-                                <img src="<?php echo $row["image"]; ?>" width="460vw" >
+                                <img src="<?php echo $row["image"]; ?>" width="100%" >
                                 <h1><?php echo $row["titre"]; ?></h1>
                                 <p><?php echo $row["description"]; ?></p>
                                 <p><?php echo $row["masse_horaire"]; ?> Heure</p>
                             </div>
                             <form action="" method="post">
                                 <input type="hidden" name="formations" value="<?php echo $row["id_formation"];?>">
-                                <button type="submit" name="inscription">Inscription</button>
+                                <button type="submit" class="btn btn-success" name="inscription">Inscription</button>
                            </form>
                         </div>
                         
