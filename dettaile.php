@@ -1,27 +1,15 @@
+<?php
+require 'db.php';
+
+?>
+
+
 <?php 
 session_start();
 $id_apprenant = $_SESSION['id_apprenant'];
-if(isset($_POST['inscription'])){
-    $con = mysqli_connect("localhost","Root","","Application");
-    $id_formation=$_POST['formations'];
-    $sql = "SELECT id_session FROM sessions WHERE id_formation='$id_formation'";
-    $resulte = mysqli_query($con,$sql);
-    $row = mysqli_fetch_assoc($resulte);
-    $id_session = $row['id_session'];
-    if(mysqli_num_rows($resulte) > 0){
-        $query="INSERT INTO `inscription`(`id_apprenant`, `id_session`, `resultat`, `date_valu`) VALUES ('$id_apprenant','$id_session',NULL,NULL)";
-        echo $query;
-        if(mysqli_query($con,$query)){
-            header("location:historique.php");
-
-        }
-    }
-
-
-}
-
-
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -32,15 +20,14 @@ if(isset($_POST['inscription'])){
         <title>Freelancer - Start Bootstrap Theme</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
-        <link href="dist/styles.css" rel="stylesheet" />
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -53,7 +40,7 @@ if(isset($_POST['inscription'])){
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="">HOME</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="index.php">HOME</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="historique.php">HISTORIQUE</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="profil.php">PROFIL</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="Login.php">Logout</a></li>   
@@ -69,100 +56,125 @@ if(isset($_POST['inscription'])){
            <section class="page-section portfolio" id="portfolio" style="margin-top: 10%;  padding-bottom:2%;">
             <div class="container">
                 <!-- Portfolio Section Heading-->
-                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Centre Formation</h2>
+                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">DETTAILE</h2>
                 <!-- Icon Divider-->
                 <div class="divider-custom">
                     <div class="divider-custom-line"></div>
                     <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                     <div class="divider-custom-line"></div>
                 </div>
- </section>
+            </section>
 
-        <div class="top-nav-right container" >
-        <form class="form-inline" action="" method="post" style="display: flex; margin-left: 28%;">
-            <div class="form-group mx-sm-3 mb-2">
-                <input type="text" class="form-control" name="search" placeholder="Search" style="width:100%; transition: width 0.4s ease-in-out;">
-            </div>
-            <div class="form-group mx-sm-3 mb-3">
-                <select class="form-select" aria-label="Default select example" name="etat">
-                    <option selected name="etat">Catégories</option>
-                    <option value="Développement Web" >Développement Web</option>
-                    <option value="Développement Mobile" >Développment Mobile</option>
-                    <option value="Designer graphique" >Designe Graphique</option>
-                    <option value="Bases de données" >Bases de données</option>
-                </select>
-            </div>
-
-            <div style="margin: bottom 10px; width: 20%;">
-            <button type="submit" name="recherche" class="btn btn-success mb-2"
-                style="background-color: #DFF3FC;border:1px solid #000;color:#000; "
-                id="btn">SEARCH</button>
-            </div>
-        </form>
-        </div>
-
-        <!-- partial:index.partial.html -->
-        <section>
-	<div class="row" style="padding:20px;">
-        <?php 
-          $con = mysqli_connect("localhost","Root","","Application");
-
-         if(isset($_POST['recherche'])){
-        
-          $titre = $_POST['search'];
-          $Categorie = $_POST['etat'];
-          $query="";
-          $result ="";
-        
-         
-          if($titre!=""){
-              $query="SELECT * FROM `formation` WHERE titre = '$titre'";
-              $result= mysqli_query($con,$query);
-          }elseif($Categorie !="" ){
-             $query="SELECT * FROM `formation` WHERE categorie = '$Categorie'";
-             $result= mysqli_query($con,$query);
-          }
-          if(mysqli_query($con,$query)){
-           
-          }
-          
-          
-        }else{
-            $query = "SELECT * FROM formation";
-            $result = mysqli_query($con,$query);
-           
-        }
-        while($row=mysqli_fetch_assoc($result)){
-            ?>
-                   <div class="col-md-4 col-sm-5 col-xs-12" style="margin-top:20px;">
-                        <div class="card" style="padding:7px;">
-                            <div class="cover item-a">
-                                <img src="<?php echo $row["image"]; ?>" width="100%" >
-                                <h1><?php echo $row["titre"]; ?></h1>
-                                <p><?php echo $row["description"]; ?></p>
-                            </div>
-                            
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" name="id"
-                                    href="dettaile.php?id=<?php echo $row['id_formation'];?>">Voire plus</a>
-                            </div>
-                           
-                        </div>
-                        
-                   </div>
-                
             <?php
-    
+
+$id_formation = $_GET['id'];
+  
+$result = mysqli_query($con, "SELECT * FROM formation WHERE id_formation = '$id_formation'");
+$row = mysqli_fetch_assoc($result);
+
+echo'
+
+<section class="">
+	<div class="container py-4">
+		<h1 class="h1 text-center" id="pageHeaderTitle">'.$row['titre'].'</h1>
+
+		<article class="postcard dark blue">
+			<a class="postcard__img_link" href="#">
+				<img class="postcard__img" src="'.$row['image'].'" alt="Image Title" " width="100%" />
+			</a>
+			<div class="postcard__text">
+				<p class="paragraph">Description</p>
+				<div class="postcard__subtitle small">
+					<time datetime="2020-05-25 12:00:00">
+						<i class="fas fa-calendar-alt mr-2"></i>Mon, May 25th 2020
+					</time>
+				</div>
+				<div class="postcard__bar"></div>
+				<div class="postcard__preview-txt">'.$row['description'].'</div><br>';
+
+                
+                    
+			
+            
+$result = mysqli_query($con, "SELECT * FROM sessions WHERE id_formation = '$id_formation'");
+// Loop through sessions and display each one in a card
+while ($row2 = mysqli_fetch_assoc($result)) {
+    ?>
+    <form method="post" action="#">
+        <div class="card mb-3">
+            <div class="card-body">
+                <h4 class="card-title">Session number : <?php echo $row2['id_session'];?></h4>
+                <h5 class="card-title">Session etat :<?php echo $row2['etat'];?></h5>
+                <h6 class="card-subtitle mb-2 text-muted">Start <?php echo $row2['date_debut'];?> - end
+                    <?php echo $row2['date_fin'];?></h6>
+                <p class="card-text">Nombre de places disponibles: <?php echo $row2['nombre_de_place'];?></p>
+                <?php $id_session =  $row2['id_session'];?>
+                <?php
+                $sql="SELECT * FROM formateurs WHERE id_formateur IN (SELECT id_formateur FROM sessions WHERE id_formation='$id_formation' AND id_session ='$id_session')";
+                $results = mysqli_query($con,$sql);
+                
+                
+                while($rows = mysqli_fetch_assoc($results)){
+                    ?>
+                <p class="card-text">Formateur: <?php echo $rows['nom_formateur'];?><span>
+                        <?php echo $rows['prenom_formateur'];?></span></p>
+
+                <?php
+                
+                }
+               
+                
+                ?>
+
+                <input type="hidden" name="id_session" value="<?php echo $row2['id_session']; ?>">
+                <input type="submit" class="btn mt-4 btn btn-success" name="submit" value="S'inscrire">
+            </div>
+        </div>
+    </form>
+    <?php
+}
+echo '</div>';
+
+if (isset($_POST['submit'])) {
+    $id_session = $_POST['id_session'];
+    $user_id = $_SESSION['id_apprenant'];
+
+    // Check if user is already registered for this session
+    $result = mysqli_query($con, "SELECT * FROM inscription WHERE id_session = '$id_session' AND id_apprenant = '$user_id'");
+    if (mysqli_num_rows($result) > 0) {
+
+       echo "<div class='alert alert-danger'>Vous êtes déjà inscrit pour cette session!</div>";
+    } else {
+        // Check if user is already registered for another session
+        $result = mysqli_query($con, "SELECT * FROM inscription WHERE id_apprenant = '$user_id'");
+        if (mysqli_num_rows($result) > 1) {
+            echo "<div class='alert alert-danger'>Vous ne pouvez pas vous inscrire à plus de deux sessions!</div>";
+        } else {
+            // Insert new registration into the database
+            $result = mysqli_query($con, "INSERT INTO inscription(id_session, id_apprenant) VALUES('$id_session', '$user_id')");
+            if ($result) {
+                echo "<div class='alert alert-success'>Inscription réussie!</div>";
+            } else {
+                echo "<div class='alert alert-danger'>Erreur lors de l'inscription.</div>";
+            }
         }
-          
-       
-        
-        
-        ?>
-	</div>
-</section>
+    }
+}
+
+?>
+
+    </article>
+
+    </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
+    </script>
 
 
-     
+
+
+
         <!-- Footer-->
         <footer class="footer text-center">
             <div class="container">
@@ -202,6 +214,5 @@ if(isset($_POST['inscription'])){
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-        <script  src="dist/script.js"></script>
     </body>
 </html>

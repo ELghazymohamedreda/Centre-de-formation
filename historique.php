@@ -65,16 +65,17 @@ $id_apprenant = $_SESSION['id_apprenant'];
         $result = mysqli_query($con,$sql);
         while( $row=mysqli_fetch_assoc($result)){
             ?>
-            <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="card">
-                        <div class="cover item-a">
-                            <img src="<?php echo $row["image"] ?>" width="460vw" >
-                            <h1><?php echo $row["titre"] ?></h1>
-                            <p><?php echo $row["description"] ?></p>
-                            <p><?php echo $row["masse_horaire"] ?> Heure</p>
+                   <div class="col-md-4 col-sm-5 col-xs-12" style="margin-top:20px;">
+                        <div class="card" style="padding:20px;">
+                            <div class="cover item-a">
+                                <img src="<?php echo $row["image"]; ?>" width="100%" >
+                                <h1><?php echo $row["titre"]; ?></h1>
+                                <p><?php echo $row["description"]; ?></p>
+                                <p><?php echo $row["masse_horaire"]; ?> Heure</p>
+                            </div>
                         </div>
-                    </div>
-		       </div>
+                        
+                   </div>
             <?php
         }
        
