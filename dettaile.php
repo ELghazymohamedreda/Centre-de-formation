@@ -85,10 +85,7 @@ echo'
 			<div class="postcard__text">
 				<p class="paragraph">Description</p>
 				<div class="postcard__subtitle small">
-					<time datetime="2020-05-25 12:00:00">
-						<i class="fas fa-calendar-alt mr-2"></i>Mon, May 25th 2020
-					</time>
-				</div>
+
 				<div class="postcard__bar"></div>
 				<div class="postcard__preview-txt">'.$row['description'].'</div><br>';
 
@@ -127,7 +124,7 @@ while ($row2 = mysqli_fetch_assoc($result)) {
                 ?>
 
                 <input type="hidden" name="id_session" value="<?php echo $row2['id_session']; ?>">
-                <input type="submit" class="btn mt-4 btn btn-success" name="submit" value="S'inscrire">
+                <input type="submit" class="btn mt-4 btn btn-success" name="submit" value="Inscription">
             </div>
         </div>
     </form>

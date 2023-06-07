@@ -89,7 +89,7 @@ if(isset($_POST['inscription'])){
                     <option value="Développement Web" >Développement Web</option>
                     <option value="Développement Mobile" >Développment Mobile</option>
                     <option value="Designer graphique" >Designe Graphique</option>
-                    <option value="Bases de données" >Bases de données</option>
+                    <option value="Bases de données " >Bases de données</option>
                 </select>
             </div>
 

@@ -58,7 +58,7 @@ $id_apprenant = $_SESSION['id_apprenant'];
                 </div>
  </section>
 
- <div class="row">
+ <div class="row container mb-5">
         <?php 
         $con = mysqli_connect("localhost","Root","","Application");
         $sql = "SELECT * FROM `formation` WHERE id_formation IN (SELECT id_formation FROM sessions WHERE id_session IN (SELECT id_session FROM inscription WHERE id_apprenant ='$id_apprenant'))";
@@ -71,7 +71,21 @@ $id_apprenant = $_SESSION['id_apprenant'];
                                 <img src="<?php echo $row["image"]; ?>" width="100%" >
                                 <h1><?php echo $row["titre"]; ?></h1>
                                 <p><?php echo $row["description"]; ?></p>
-                                <p><?php echo $row["masse_horaire"]; ?> Heure</p>
+                                <?php 
+                                $id = $row["id_formation"];
+                                $sql2 = "SELECT * FROM  `sessions` WHERE id_formation='$id' and id_session IN (SELECT id_session FROM inscription WHERE id_apprenant ='$id_apprenant')";
+                                $result2 = mysqli_query($con,$sql2);
+                                $rowd=mysqli_fetch_assoc($result2)
+                                    ?>
+                                    <h2 ><?php echo $rowd["etat"] ?></h2>
+                                    <h6 class="card-subtitle mb-2 text-muted">Start <?php echo $rowd['date_debut'];?> - end
+                                    <?php echo $rowd['date_fin'];?></h6>
+                                    <?php
+                                
+
+                                ?>
+
+
                             </div>
                         </div>
                         
